@@ -1,0 +1,6 @@
+Django==5.0
+numpy==1.26.2
+openai==1.6.0
+Pillow==10.1.0
+
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Contact</title>
+    <!-- Link to the Tailwind CSS stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<!-- Header -->
+<header class="bg-gray-800 text-white p-4">
+    <div class="container mx-auto">
+        <a href="{% url 'chat_list' %}" class="block text-2xl font-semibold text-white mb-4">
+            Back to Chat History
+        </a>
+    </div>
+</header>
+<!-- Contact List -->
+<div class="container mx-auto p-4 mt-4">
+    <div style="margin-bottom: 8px">Your Bots:</div>
+    <ul class="contact-list">
+        {% for user_chatbot in user_chatbots %}
+            <li style="display: flex; align-items: center; justify-content: space-between; background-color: #CFD8DC; border: 1px solid #B0BEC5;" class="contact-item rounded p-2 mb-2 hover:bg-gray-100">
+                <div class="contact-link cursor-pointer flex items-center" onClick="">
+                    <div class="chat-avatar" style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
+                        <img src="http://localhost:8000/{{user_chatbot.avatar }}" alt="User 1"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="contact-details" style="margin-left: 10px">
+                        <b><h2 class="contact-name">{{ user_chatbot.name }}</h2></b>
+                        <p class="contact-desc">{{ user_chatbot.chat_conf }}</p>
+                    </div>
+                </div>
+
+                <div style="margin-right: 16px">
+                    <button 
+                        type="button" 
+                        style="width: 120px; height: 30px; background-color: #263238; color: #ffffff; border-radius: 4px"
+                        onclick="window.location.href='{% url 'edit-bot'%}?id={{user_chatbot.id}}'"
+                    >
+                        Edit Bot
+                    </button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+   
+
+    <div style=" height: 2px; background-color: #607D8B; margin: 32px 0;"></div>
+
+    <ul class="contact-list">
+        {% for chat_bot in chat_bots %}
+            <li style="display: flex; align-items: center; justify-content: space-between;" class="contact-item border rounded p-2 mb-2 hover:bg-gray-100">
+                <div class="contact-link cursor-pointer flex items-center" onClick='window.location.href = "http://localhost:8000/chat_details/?bot_id={{chat_bot.id}}"';
+>
+                            <div class="chat-avatar" style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%;">
+                        <img src="http://localhost:8000/{{ chat_bot.avatar }}" alt="User 1"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="contact-details" style="margin-left: 10px">
+                        <b><h2 class="contact-name">{{ chat_bot.name }}</h2></b>
+                        <p class="contact-desc">{{ chat_bot.chat_conf }}</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 32px; margin-right: 16px">
+                    <div style="display: flex; align-items: center; gap: 8px">
+                        <span style="font-size: 14px">Like</span>
+                        <span style="font-weight: bold; color: #1DE9B6;">{{ chat_bot.like_cnt }}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px">
+                        <span style="font-size: 14px">Dislike</span>
+                        <span style="font-weight: bold; color: #FF5722;">{{ chat_bot.dislike_cnt}}</span>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<script>
+    newConversation(id){
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Select Contact</title>
+        <!-- Link to the Tailwind CSS stylesheet -->
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-gray-100" style="display: flex; flex-direction: column;">
+        <!-- Header -->
+        <header class="bg-gray-800 text-white p-4">
+            <div class="container mx-auto">
+                <a href="{% url 'chat_list' %}" class="block text-2xl font-semibold text-white mb-4">
+                    Back to Chat History
+                </a>
+            </div>
+        </header>
+        <form 
+            action="{% url 'create-bot' %}"
+            method="post"
+            enctype="multipart/form-data"
+            style="width: 500px; height: 560px; display: flex; flex-direction: column; align-items: center; gap: 20px; align-self: center; background-color: #ECEFF1; border: 1px solid black; margin-top: 30px; padding: 32px;"
+        >
+        {%csrf_token%}
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+                <div style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background-color: #CFD8DC; border-radius: 100%">
+                    <img 
+                        src="https://cdn-icons-png.flaticon.com/512/8943/8943377.png"
+                        alt="bot-avatar"
+                        style="width: 30px; height: 30px"
+                    />
+                </div>
+                <input type="file" name="avatar" />
+            </div> 
+
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 5px">
+                <label for="bot-name-input">Enter bot name:</label>
+                <input id="bot-name-input" type="text" name="name" style="width: 100%; height: 30px; background-color: transparent; border: 1px solid #000000; border-radius: 4px; padding: 0 8px 2px 8px;" />
+            </div>
+
+
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 5px">
+                <label for="botj-conf-textarea">Enter bot configuration content:</label>
+                <textarea id="bot-conf-textarea" name="chat_conf" style="width: 100%; height: 200px; background-color: transparent; border: 1px solid #000000; border-radius: 4px; padding: 8px;"></textarea>
+            </div>
+
+            <button 
+                type="submit" 
+                style="width: 160px; height: 40px; align-self: flex-end; background-color: #2196F3; color: #ffffff; border-radius: 4px"
+                onclick="window.location.href='{% url 'create-bot' %}'"
+       l    >
+                Create New Bot
+            </button>
+        </form>
+    </body>
+</html>

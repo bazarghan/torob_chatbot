@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat History</title>
+    <!-- Link to the Tailwind CSS stylesheet -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-gray-800 text-white p-4">
+      <div class="container mx-auto">
+        <h1 class="text-2xl font-semibold">Chat History</h1>
+      </div>
+    </header>
+    <div class="container mx-auto p-4 mt-4">
+      <h2 style="margin-bottom: 32px" class="text-xl font-semibold">
+        Search Results
+      </h2>
+      <ul class="chat-list">
+        {% for message in search_results %}
+        <li class="chat-item border rounded p-2 mb-4 hover:bg-gray-100">
+          <a
+            href="{% url 'chat_details'%}?id={{message.conversation.id}}"
+            class="chat-link flex items-center"
+          >
+            <div
+              class="chat-avatar"
+              style="
+                width: 60px;
+                height: 60px;
+                overflow: hidden;
+                border-radius: 50%;
+              "
+            >
+              <img
+                src="http://localhost:8000/{{ message.conversation.chatbot.avatar }}"
+                alt="User 1"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </div>
+
+            <div class="chat-details" style="margin-left: 10px">
+              <b
+                ><h2 class="chat-title">
+                  {{ message.conversation.chatbot.name }}
+                </h2></b
+              >
+              <p class="chat-preview">{{ message.conversation.name }}</p>
+              <p class="chat-date">{{ message.content|slice:"0:200" }} ...</p>
+            </div>
+          </a>
+        </li>
+        {% endfor %}
+        <!-- Add more chat items here with the same added styles -->
+      </ul>
+    </div>
+    <footer>
+      {% comment %}
+      <div style="display: flex; gap: 16px; padding: 16px">
+        <button
+          type="button"
+          style="
+            width: 160px;
+            height: 40px;
+            background-color: #2196f3;
+            color: #ffffff;
+            border-radius: 4px;
+          "
+          onclick="window.location.href='{% url 'create_chat' %}'"
+        >
+          Create New Chat
+        </button>
+
+        <button
+          type="button"
+          style="
+            width: 160px;
+            height: 40px;
+            background-color: #2196f3;
+            color: #ffffff;
+            border-radius: 4px;
+          "
+          onclick="window.location.href='{% url 'create-bot' %}'"
+        >
+          Create New Bot
+        </button>
+      </div>
+      {% endcomment %}
+    </footer>
+  </body>
+</html>

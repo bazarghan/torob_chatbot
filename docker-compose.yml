@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: chatbot
+    volumes:
+      - ./chatbot:/chatbot
+    ports:
+      - "8000:8000"
