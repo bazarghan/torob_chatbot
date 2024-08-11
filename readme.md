@@ -13,7 +13,7 @@
 1. ابتدا پروژه بصورت زیر clone کنید.
 
     ```bash
-    git clone https://hamgit.ir/torobche/torob
+    git clone https://github.com/bazarghan/torob_chatbot
     ```
 
 2. به پوشه اصلی پروژه برید و دستور زیر رو بزنید:
